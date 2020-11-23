@@ -33,14 +33,8 @@ class FastScanner {
 
 public class CrackTheInterview {    
 
-    public boolean isAPalindromePermutation(String str){
-        int totalLength = str.length();
+    public boolean isAPalindromePermutation(String str){      
         int counterForOddLetterLength = 0;
-        for(int i=0;i<str.length();i++){
-            if(str.charAt(i) == ' '){
-                totalLength--;
-            }
-        }
         int [] letterCount = new int[26];
         Arrays.fill(letterCount, 0);
         for(int i=0;i<str.length();i++){
@@ -49,24 +43,12 @@ public class CrackTheInterview {
                 letterCount[val]++;
             }
         }
-        if(totalLength %2 == 0){
-            for(int i=0;i<26;i++){
-                if(letterCount[i] %2 != 0){
-                    return false;
-                }
-            }
+        for(int i=0;i<26;i++){
+            if(letterCount[i] %2 != 0){
+                counterForOddLetterLength++;
+            }                
         }
-        else{
-            for(int i=0;i<26;i++){
-                if(letterCount[i] %2 != 0){
-                    counterForOddLetterLength++;
-                }                
-            }
-            if(counterForOddLetterLength != 1){
-                return false;
-            }
-        }
-        return true;
+        return counterForOddLetterLength <= 1;
     }
 
     public static void main(String[] args) {
