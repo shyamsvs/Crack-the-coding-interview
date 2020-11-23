@@ -33,38 +33,42 @@ class FastScanner {
 
 public class CrackTheInterview {    
 
-    public boolean isOneWayArray(String str1, String str2){    
-        int hash1[] = new int[26];
-        int hash2[] = new int[26];
-        int val;
-        Arrays.fill(hash1, 0);
-        Arrays.fill(hash2, 0);
-        for(int i=0;i<str1.length();i++){
-            val = str1.charAt(i) - 'a';
-            hash1[val]++;
-        }
-        for(int i=0;i<str2.length();i++){
-            val = str2.charAt(i) - 'a';
-            hash2[val]++;
-        }
-        int change = 0;
-        for(int i=0;i<26;i++){
-            if(hash1[i] != hash2[i]){
-                change++;
-            }
-        }
-        if(str1.length() == str2.length())return change <= 2;
-        return change == 1;
-    }
+    public static boolean oneEditAway(String first, String second) {
+		if (Math.abs(first.length() - second.length()) > 1) {
+			return false;
+		}
+		
+		String s1 = first.length() < second.length() ? first : second;
+		String s2 = first.length() < second.length() ? second : first;
 
-    public static void main(String[] args) {
-        //FastScanner fscanner = new FastScanner();    
-        CrackTheInterview cci = new CrackTheInterview();
-        Scanner scanner = new Scanner(System.in);    
-        String s1 = "pales";
-        String s2 = "pale";
-        boolean ans = cci.isOneWayArray(s1,s2);
-        System.out.println(ans);
-        scanner.close();
+		int index1 = 0;
+		int index2 = 0;
+		boolean foundDifference = false;
+		while (index2 < s2.length() && index1 < s1.length()) {
+			if (s1.charAt(index1) != s2.charAt(index2)) {
+				if (foundDifference) return false;
+				foundDifference = true;
+				if (s1.length() == s2.length()) {
+					index1++;
+				}
+			} else {
+				index1++; 
+			}
+			index2++; 
+		}
+		return true;
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		String a = "adfdsfadsf";
+		String b = "affdsfads";
+		boolean isOneEdit1 = oneEditAway(a, b);
+		System.out.println(a + ", " + b + ": " + isOneEdit1);
+		String c = "pale";
+		String d = "pkle";
+		boolean isOneEdit2 = oneEditAway(c, d);
+		System.out.println(c + ", " + d + ": " + isOneEdit2);
     }        
 } 
