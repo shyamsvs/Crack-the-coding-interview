@@ -35,11 +35,14 @@ public class CrackTheInterview {
 
     public boolean isAPalindromePermutation(String str){      
         int counterForOddLetterLength = 0;
+        char c;
+        int val;
         int [] letterCount = new int[26];
         Arrays.fill(letterCount, 0);
         for(int i=0;i<str.length();i++){
-            if(str.charAt(i) != ' '){
-                int val = str.charAt(i) - 'a';
+            if(str.charAt(i) != ' '){    
+                c = str.charAt(i);            
+                val = Character.toLowerCase(c) - 'a';                
                 letterCount[val]++;
             }
         }
@@ -55,7 +58,7 @@ public class CrackTheInterview {
         //FastScanner fscanner = new FastScanner();    
         CrackTheInterview cci = new CrackTheInterview();
         Scanner scanner = new Scanner(System.in);    
-        String s = "tact coa";
+        String s = "Rats live on no evil star";
         boolean ans = cci.isAPalindromePermutation(s);
         System.out.println(ans);
         scanner.close();
