@@ -11,7 +11,7 @@ public class LinkedListKthLargest {
         }
     }
 
-    static int kThLargest(int k){
+    static int kThLargestSorting(int k){
         Node cur = null, nex = null;
         int temp;
         cur = head;
@@ -39,6 +39,20 @@ public class LinkedListKthLargest {
         return 0;
     }
 
+    //need to do assending order for sorting
+    static int kThLargestTwoPointerAfterSorting(int k){
+        Node p1 = head, p2 = head;
+        for(int i = 0;i < k;i++){
+            if (p1 == null)return 0;
+            p1 = p1.next;
+        }
+        while (p1 != null){
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        return p2.data;
+    }
+
     static void print(Node node){
         while (node != null){
             System.out.println(node.data + " ");
@@ -61,7 +75,10 @@ public class LinkedListKthLargest {
         System.out.println("Enter the integer");
         Scanner scanner = new Scanner(System.in);
         int kThElement = scanner.nextInt();
-        int ans = list.kThLargest(kThElement);
+        int ans = list.kThLargestSorting(kThElement);
+        list.print(head);
+        int ans1 = list.kThLargestTwoPointerAfterSorting(kThElement);
         System.out.println(ans);
+        System.out.println(ans1);
     }
 }
