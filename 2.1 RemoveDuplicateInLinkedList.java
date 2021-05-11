@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 public class LinkedList {
     static Node head;
     static class Node{
@@ -9,7 +11,7 @@ public class LinkedList {
         }
     }
 
-    public void removeDup(){
+    public void removeDupUsingTwoLoops(){
         Node pt1 = null;
         Node pt2 = null;
         pt1 = head;
@@ -25,6 +27,23 @@ public class LinkedList {
                 }
             }
             pt1 = pt1.next;
+        }
+    }
+
+    public void removeDupUsingHash(){
+        HashSet<Integer> hs = new HashSet<>();
+        Node cur = head;
+        Node prev = null;
+        while (cur != null){
+            int curval = cur.data;
+            if(hs.contains(curval)){
+                prev.next = cur.next;
+            }
+            else {
+                hs.add(curval);
+                prev = cur;
+            }
+            cur = cur.next;
         }
     }
 
@@ -46,7 +65,8 @@ public class LinkedList {
         System.out.println("Before\n");
         list.print(head);
         System.out.println("After\n");
-        list.removeDup();
+        list.removeDupUsingTwoLoops();
+        list.removeDupUsingHash();
         list.print(head);
     }
 }
